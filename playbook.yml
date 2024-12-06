@@ -184,3 +184,14 @@
   tasks:
     - name: add worker nodes to cluster
       shell: "sudo {{ hostvars['control_plane'].join_node }}"
+
+- name: Setup Prometheus and Grafana
+  hosts: localhost
+  become: true
+  tasks:
+    - name: run bash script to install monitoring tools with helm charts
+      shell: 
+        cmd: |
+          export KUBECONFIG=./files/kubeconfig
+          
+          bash deploy_monitoring.sh
