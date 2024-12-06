@@ -1,0 +1,7 @@
+.terraform/
+files/arvan_sre_rsa
+files/arvan_sre_rsa.pub
+.vscode/settings.json
+.terraform.lock.hcl
+terraform.tfstate.backup
+files/kubeconfig
