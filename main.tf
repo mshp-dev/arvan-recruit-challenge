@@ -239,7 +239,7 @@ resource "aws_key_pair" "arvan_sre_ssh_keypair" {
   public_key = tls_private_key.arvan_sre_ssh_rsa_private_key.public_key_openssh
 
   provisioner "local-exec" {
-    command = "echo '${tls_private_key.arvan_sre_ssh_rsa_private_key.private_key_pem}' > ./files/arvan_sre_rsa && chmod 400 ./files/arvan_sre_rsa"
+    command = "echo '${tls_private_key.arvan_sre_ssh_rsa_private_key.private_key_pem}' > ./files/arvan_sre_rsa"
   }
 }
 ### 2. create 1/one ec2 instance to play as k8s control plane
@@ -300,8 +300,7 @@ resource "aws_instance" "arvan_sre_ec2_k8s_workers" {
   }
 }
 
-## 8. spin up a k8s cluster with ansible
-### 1. create host inventory for k8s control plane
+## 8. create host inventory for k8s control plane and worker nodes
 resource "ansible_host" "arvan_sre_control_plane_host" {
   depends_on = [
     aws_instance.arvan_sre_ec2_k8s_master
@@ -317,7 +316,6 @@ resource "ansible_host" "arvan_sre_control_plane_host" {
     node_hostname                = "master"
   }
 }
-### 2. create host inventory for k8s worker nodes
 resource "ansible_host" "arvan_sre_worker_nodes_host" {
   depends_on = [
     aws_instance.arvan_sre_ec2_k8s_workers
@@ -334,11 +332,6 @@ resource "ansible_host" "arvan_sre_worker_nodes_host" {
     ansible_ssh_private_key_file = "./files/arvan_sre_rsa"
   }
 }
-### 2. create cluster with ansible playbook
-# resource "ansible_playbook" "arvan_sre_ansible_playbook_spin_up_k8s_cluster" {
-#   name = "ansible_playbook_${var.name_postfix}"
-#   playbook = "playbook.yml"
-# }
 
 # output "instances" {
 #   value = data.arvan_abraks.instance_list.instances

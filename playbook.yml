@@ -4,15 +4,15 @@
   gather_facts: false
   become: true
   tasks:
-    - name: Wait 200 seconds for port 22 to become open and contain "OpenSSH"
-      wait_for:
-        port: 22
-        host: "{{ (ansible_ssh_host|default(ansible_host))|default(inventory_hostname) }}"
-        search_regex: OpenSSH
-        delay: 10
-        timeout: 200
-      vars:
-        ansible_connection: local
+    # - name: Wait 200 seconds for port 22 to become open and contain "OpenSSH"
+    #   wait_for:
+    #     port: 22
+    #     host: "{{ (ansible_ssh_host|default(ansible_host))|default(inventory_hostname) }}"
+    #     search_regex: OpenSSH
+    #     delay: 10
+    #     timeout: 200
+    #   vars:
+    #     ansible_connection: local
 
     - name: Set a hostname
       hostname:
@@ -160,6 +160,9 @@
 
     - name: install flannel
       shell: kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+
+    # - name: install prometheus-operator
+    #   shell: kubectl create -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/master/bundle.yaml
 
     - name: Copy kubeconfig file locally
       fetch:
