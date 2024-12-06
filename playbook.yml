@@ -185,6 +185,13 @@
     - name: add worker nodes to cluster
       shell: "sudo {{ hostvars['control_plane'].join_node }}"
 
+- name: test
+  tasks:
+    - name: test1
+      k8s_auth:
+        kubeconfig: ./files/kubeconfig
+      register: kube_auth
+
 - name: Setup Prometheus and Grafana
   hosts: localhost
   become: true
