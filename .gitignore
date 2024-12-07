@@ -3,3 +3,4 @@ venv/
 .vscode
 *terraform*
 *.pyc
+db.sqlite3
