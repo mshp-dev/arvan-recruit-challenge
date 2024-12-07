@@ -185,11 +185,11 @@
     - name: add worker nodes to cluster
       shell: "sudo {{ hostvars['control_plane'].join_node }}"
 
-- name: Setup Prometheus and Grafana
+- name: Install Prometheus and Grafana in cluster
   hosts: localhost
   become: true
   tasks:
-    - name: Install Prometheus Helm Chart
+    - name: Install Prometheus with Helm Chart
       shell:
         cmd: |
           helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -200,12 +200,33 @@
       tags:
         - local
     
-    - name: Install Grafana Helm Chart
+    - name: Install Grafana with Helm Chart
       shell:
         cmd: |
           helm repo add grafana https://grafana.github.io/helm-charts
           helm repo update
           helm install grafana grafana/grafana
           kubectl expose service grafana --type=NodePort --target-port=3000 --name=grafana-ext
+      tags:
+        - local
+
+- name: Setup ArgoCD in cluster
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Create Separate Namespace for ArgoCD
+      kubernetes.core.k8s:
+        name: argocd
+        api_version: v1
+        kind: Namespace
+        state: present
+      tags:
+        - local
+    
+    - name: Install ArgoCD with Helm Chart
+      shell:
+        cmd: |
+          kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+          
       tags:
         - local
