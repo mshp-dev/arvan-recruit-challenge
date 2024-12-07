@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+sqlmodel
+Geocoder
+typing
+psycopg2
