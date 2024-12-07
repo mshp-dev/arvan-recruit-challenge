@@ -6,3 +6,5 @@ files/arvan_sre_rsa.pub
 terraform.tfstate.backup
 files/kubeconfig
 files/hosts
+ip_info
+venv
