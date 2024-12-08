@@ -108,10 +108,16 @@
 
 ### 1.2. Spin up a k8s cluster (3 nodes) with Ansible
 - #### The playbook.yml contains necessary tasks for setup the kubernetes cluster on newly provioned aws ec2 isntances
+  ```bash
+  ansible-playbook -i inventory.yml playbook.yml
+  ```
 
 ### 1.3. Monitoring with Prometheus+Grafana
 - #### After initializing the k8s cluster in remote machines, there are some tasks in playbook.yml that installs helm chart of the Prometheus and Grafana repo in the k8s cluster.
 - #### Some part of the setup process can be automated and done by ansible playbook, but to have a robust and reliable monitoring, one should customize the configurations and other stuff by hand.
+  ```bash
+  ansible-playbook playbook.yml --tags monitoring
+  ```
 
 ### 1.4. Suitable Alerting System
 - #### The prometheus alert manager could be configured with initial prometheus helm chart installation
@@ -119,13 +125,16 @@
 ### 1.5. Deploy a Postgres cluster in k8s
 - #### After initializing the k8s cluster in remote machines, there are some tasks in playbook.yml that installs helm chart of the Postgresql Cluster repo in the k8s cluster.
 - #### Retrieving postgres user password and put it in a vault or environment variables also could be done by automation in ansible playbook.
+  ```bash
+  ansible-playbook playbook.yml --tags postgres
+  ```
 
 ## 2. Selective Part
 - #### The below explanation represents the steps have been taken to resolve the issues of the first selective part of the challenge.
 - #### All of the resources and necessary files of this part are present in <a href="https://github.com/mshp-dev/arvan-recruit-challenge/tree/selective-part-1">selective-part-1</a> branch of this repository.
 ### 2.1. Write a Web-API with python
 - #### Write a Web-API with python
-  - To have a robust and concrete REST-API for this purpose, i choose python and its powerful web framework django with grate djangorestframework plugin alongside it, and also to retrieve the given ipv4 information easily, i used geocoder library from pipy.
+  - To have a robust and concrete REST-API, i choose python and its powerful web framework django with grate djangorestframework plugin alongside it, and also to retrieve the given ipv4 information easily, i used geocoder library from pipy.
   - The dockerfile and ci workflow for development with github action enabled for the repository on push to the selective-part-1 branch, the docker image of final application will be pushed to docker registry.
 - #### Insert data into postgres and query history
   - Create a model of IPv4GeoLocationInfo to store data into database.
