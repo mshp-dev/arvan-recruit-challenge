@@ -20,16 +20,25 @@ Install ip_info with python
 ## API Reference
 
 #### Get info of IPv4
+##### Use with Basic Authentication
 
 ```http
   POST /api/ip-info
+  {
+    "ip": "1.1.1.1" 
+  }
 ```
 
 | Parameter | Type     | Description                     |
 | :-------- | :------- | :-----------------------------  |
 | `ip`      | `string` | **Required**. The IPv4 Address  |
 
-##### Use with Basic Authentication
+#### Get metrics
+##### Use in grafana dashboards with prometheus exporter
+
+```http
+  GET /api/metrics
+```
 
 
 ## Documentation
