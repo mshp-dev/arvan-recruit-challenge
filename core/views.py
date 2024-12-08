@@ -10,6 +10,7 @@ from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 import geocoder
 
 from .models import IPv4GeoDataModel
+from .utils import Metrics
 
 
 @api_view(['POST'])
@@ -48,4 +49,5 @@ def get_ip_info(request):
             'message': 'wrong value instead of valid public IPv4!'
         }
     finally:
+        Metrics.count_of_api_call.inc()
         return Response(data=data, status=status)

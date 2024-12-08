@@ -1,4 +1,12 @@
 from django.db import models
+from django_prometheus.models import ExportModelOperationsMixin
+
+import uuid
+
+
+class Dataset(ExportModelOperationsMixin("dataset"), models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)
+    alias = models.TextField()
 
 
 class IPv4GeoDataModel(models.Model):
