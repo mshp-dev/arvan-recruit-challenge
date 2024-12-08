@@ -207,6 +207,18 @@
       tags:
         - local
 
+- name: Deploy Postgresql Cluster
+  hosts: localhost
+  become: true
+  tasks:    
+    - name: Install Postgresql with Helm Chart
+      shell:
+        cmd: |
+          helm install postgres oci://registry-1.docker.io/bitnamicharts/postgresql
+          
+      tags:
+        - local
+
 - name: Setup ArgoCD in cluster
   hosts: localhost
   become: true
@@ -222,21 +234,32 @@
     
     - name: Install ArgoCD with Helm Chart
       shell:
-        cmd: |
-          kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-          
+        cmd: kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
       tags:
         - local
 
-- name: Deploy Postgresql Cluster
-  hosts: localhost
-  become: true
-  tasks:    
-    - name: Install Postgresql with Helm Chart
-      shell:
-        cmd: |
-          helm install postgres oci://registry-1.docker.io/bitnamicharts/postgresql
+# - name: Application Deployment
+#   hosts: localhost
+#   become: true
+#   tasks:
+#     - name: Deploy GeoLocation Info API written in python using argocd
+#       shell:
+#         cmd: |
+#           argocd 
 
-
-      tags:
-        - local
+#     - name: Expose Deployment as a Service
+#       kubernetes.core.k8s:
+#         definition:
+#           apiVersion: v1
+#           kind: Service
+#           metadata:
+#             name: myapp-service
+#             namespace: my-namespace
+#           spec:
+#             selector:
+#               app: myapp
+#             ports:
+#               - protocol: TCP
+#                 port: 80
+#                 targetPort: 80
+#             type: LoadBalancer

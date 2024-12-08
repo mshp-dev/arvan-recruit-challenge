@@ -8,3 +8,6 @@ files/kubeconfig
 files/hosts
 ip_info
 venv
+*.pyc
+db.sqlite3
+.env
