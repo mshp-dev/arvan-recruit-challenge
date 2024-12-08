@@ -9,7 +9,8 @@
   - <a href="#15-deploy-a-postgres-cluster-in-k8s">Deploy a Postgresql Cluster in k8s cluster</a>
 
 * The selective part of the challenge was as below:
-  - <a href="#13-monitoring-with-prometheusgrafana">Design a Web API to retrieve the country of given ip address and implement it with Go or Python</a>
+  - <a href="#write-a-web-api-with-python">Design a Web API to retrieve the country of given ip address and implement it with Go or Python</a>
+  - <a href="#write-a-web-api-with-python">Design a Web API to retrieve the country of given ip address and implement it with Go or Python</a>
 
 
 ## 0. Prerequisties
@@ -125,6 +126,10 @@
   - To have a robust and concrete REST-API for this purpose, i choose python and its powerful web framework django with grate djangorestframework plugin alongside it, and also to retrieve the given ipv4 information easily, i used geocoder library from pipy.
   - The dockerfile and ci workflow for development with github action enabled for the repository on push to the selective-part-1 branch, the docker image of final application will be pushed to docker registry.
 - #### Insert data into postgres and query history
+  - Create a model of IPv4GeoLocationInfo to store data into database.
+  - Use the deployed psotgresql with inter-cluster domain name as the main database in django
+  - Insert new received ip into postgresql with django postgres engine.
+  - Make sure to query already inserted data to make response to api calls faster.
 - #### Deploy workflow into k8s with CI/CD and Automation
   - I created a separate branch called <a href="https://github.com/mshp-dev/arvan-recruit-challenge/tree/selective-part-1_cd">selective-part-1_cd</a> for the cd pipeline and create a helm chart for the deployment, the ci pipeline eventually will trigger the ci pipeline after successfull build.
 - #### Write metrics for the application in monitoring
