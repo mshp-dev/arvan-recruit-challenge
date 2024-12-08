@@ -2,7 +2,7 @@ replicaCount: 1
 namespace: default
 image:
   repository: mojecloud/raycaoi-backend
-  tag: "4375820"
+  tag: "fec1820"
   pullPolicy: IfNotPresent
 containerPort: 80
 envs:
