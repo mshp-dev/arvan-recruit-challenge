@@ -72,6 +72,10 @@
       }
     }
     ```
+    and run the following command:
+    ```bash
+    terraform init
+    ```
   * Create the VPC with aws_vpc resource
   * Create a public subnet
   * Create an internet gateway and attach it to the VPC
@@ -85,9 +89,13 @@
     * Create the control plane node
     * Create the worker nodes
   * Create the ansible hosts ansible_host resource
-    ```bash
-    ansible-galaxy collection install cloud.terraform
-    ```
+
+  ```bash
+  ansible-galaxy collection install cloud.terraform
+  terraform validate
+  terraform plan
+  terraform apply
+  ```
 
 ### 2. Spin up a k8s cluster (3 nodes) with Ansible
 - #### The playbook.yml contains necessary tasks for setup the kubernetes cluster on newly provioned aws ec2 isntances
