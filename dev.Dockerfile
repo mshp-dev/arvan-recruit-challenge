@@ -16,5 +16,5 @@ COPY . .
 # Expose the port on which the application will run
 EXPOSE 80
 
-# Run the FastAPI application using uvicorn server
+# Run the Django application using gunicorn server
 CMD ["gunicorn", "ip_info", "--bind", "0.0.0.0:80"]
