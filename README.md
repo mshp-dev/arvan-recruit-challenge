@@ -1,61 +1,72 @@
 # Arvan Recruit Challenge
 
-1) Creating VMs with Terraform
-    Spin up a k8s cluster (3 nodes) with Ansible
-    Monitoring with Prometheus+Grafana
-    Suitable Alerting System !!!
-    Deploy a Postgres cluster in k8s
+## 0. Prerequisties
 
-2) Write a Web-API with python
+## 1. Main Part
+### 1.1. Creating VMs with Terraform
+### 1.2. Spin up a k8s cluster (3 nodes) with Ansible
+### 1.3. Monitoring with Prometheus+Grafana
+### 1.4. Suitable Alerting System
+### 1.5. Deploy a Postgres cluster in k8s
+
+## 2. Selective Part
+### 2.1. Write a Web-API with python
+    Write a Web-API with python
     Insert data into postgres and query history
-    Deploy workflow into k8s
-    Deploy with CI/CD and Automation
+    Deploy workflow into k8s with CI/CD and Automation
     Write metrics for the application in monitoring
 
-3) Deploy an ELK cluster into k8s
+### 2.2. Deploy an ELK cluster into k8s
     Gathering all error logs of application
     Gathering logs of all pods in k8s
     Visualize all logs and errors in Kibana
 
 
 ## Install required cli tools
+  - aws cli
+    ```bash
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    ./aws/install
+    ## confirming aws cli install
+    ```
   - terraform
     ```bash
-    root@host:~# wget -O - https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-    root@host:~# echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/hashicorp.list
-    root@host:~# apt update && apt install -y terraform
+    wget -O - https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/hashicorp.list
+    apt update && apt install -y terraform
     ## confirming argocd install
-    root@host:~# terraform version
+    terraform version
     ```
   - ansible
     ```bash
-    root@host:~# apt install software-properties-common ca-certificates curl gnupg gpg python3-pip python3-dev
-    root@host:~# add-apt-repository --yes --update ppa:ansible/ansible
-    root@host:~# apt update && apt install -y ansible
+    apt install software-properties-common ca-certificates curl gnupg gpg python3-pip python3-dev
+    add-apt-repository --yes --update ppa:ansible/ansible
+    apt update && apt install -y ansible
     ## confirming ansible install
-    root@host:~# ansible --version
+    ansible --version
     ```
   - kubectl
     ```bash
-    root@host:~# curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-    root@host:~# install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
     ## confirming kubectl install
-    root@host:~# kubectl version
+    kubectl version
     ```
   - helm cli
     ```bash
-    root@host:~# curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/root@host:~# helm/helm/main/scripts/get-helm-3
-    root@host:~# chmod 700 get_helm.sh
-    root@host:~# ./get_helm.sh
+    curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+    chmod 700 get_helm.sh
+    ./get_helm.sh
     ## confirming helm install
-    root@host:~# helm version
+    helm version
     ```
   - argocd cli
     ```bash
-    root@host:~# curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-    root@host:~# install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
+    curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+    install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
     ## confirming argocd install
-    root@host:~# argocd version
+    argocd version
     ``` 
 
 ## Infrastructure
