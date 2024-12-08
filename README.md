@@ -1,6 +1,6 @@
-# Arvan Recruit Challenge
+# Main Part of Arvan Recruit Challenge
 
-* This Repository represents the steps have been taken to resolve the issues of the challenges in main part and selective part
+* This main-part branch of this Repository represents the steps have been taken to resolve the issues of the main part of the challenge.
 
 ## Prerequisties
 ### Install required cli tools
