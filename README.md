@@ -10,7 +10,9 @@
 
 * The selective part of the challenge was as below:
   - <a href="#write-a-web-api-with-python">Design a Web API to retrieve the country of given ip address and implement it with Go or Python</a>
-  - <a href="#write-a-web-api-with-python">Design a Web API to retrieve the country of given ip address and implement it with Go or Python</a>
+  - <a href="#insert-data-into-postgres-and-query-history">Use the deployed postgresql to store data and query for history of api calls</a>
+  - <a href="#deploy-workflow-into-k8s-with-cicd-and-automation">Deploy workflow into k8s with CI/CD and Automation</a>
+  - <a href="#write-metrics-for-the-application-in-monitoring">Write metrics for your application</a>
 
 
 ## 0. Prerequisties
