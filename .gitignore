@@ -1,12 +1,5 @@
-.terraform/
-files/arvan_sre_rsa
-files/arvan_sre_rsa.pub
+*terraform*
 .vscode/
-.terraform.lock.hcl
-terraform.tfstate.backup
-files/kubeconfig
-files/hosts
-ip_info
 venv
 *.pyc
 db.sqlite3

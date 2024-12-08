@@ -1,0 +1,52 @@
+{{- if .Values.ingressRoute.create -}}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "geo_loc_api.fullname" . }}-http
+  namespace: {{ .Values.namespace }}
+spec:
+  entryPoints:
+  - web
+  routes:
+  - kind: Rule
+    match: Host(`{{ .Values.ingressRoute.host }}`)
+    priority: 10
+    middlewares:
+    - name: {{ .Values.ingressRoute.redirectMiddleware }}
+      namespace: {{ .Values.namespace }}
+    services:
+    - name: noop
+      port: 9999
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "geo_loc_api.fullname" . }}-https
+  namespace: {{ .Values.namespace }}
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - kind: Rule
+    match: Host(`{{ .Values.ingressRoute.host }}`)
+    priority: 10
+    services:
+    - kind: Service
+      name: {{ include "geo_loc_api.fullname" . }}
+      namespace: {{ .Values.namespace }}
+      passHostHeader: true
+      port: {{ .Values.service.port }}
+      responseForwarding:
+        flushInterval: 1ms
+      scheme: http
+      # sticky:
+      #   cookie:
+      #     httpOnly: true
+      #     name: cookie
+      #     secure: true
+      #     sameSite: none
+      # strategy: RoundRobin
+      # weight: 10
+  tls:
+    secretName: {{ .Values.ingressRoute.tls.secretName }}
+{{- end -}}

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "geo_loc_api.fullname" . }}
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    name: {{ include "geo_loc_api.fullname" . }}
+  ports:
+    - protocol: {{ .Values.service.protocol }}
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}

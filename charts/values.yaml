@@ -1,0 +1,36 @@
+replicaCount: 1
+namespace: default
+image:
+  repository: mojecloud/raycaoi-backend
+  tag: "4375820"
+  pullPolicy: IfNotPresent
+containerPort: 80
+envs:
+  POSTGRES_DB_NAME: ip_info
+  POSTGRES_DB_USERNAME: postgres
+  POSTGRES_DB_HOST: postgres-postgresql.default.svc.cluster.local
+  POSTGRES_DB_PORT: 32502
+secrets:
+  create: true
+  values:
+    POSTGRES_DB_PASSWORD: dFQ1dk5NZ1JDOAo=
+service:
+  type: ClusterIP
+  protocol: TCP
+  port: 80
+  targetPort: 80
+ingressRoute:
+  create: true
+  annotations: {}
+  host: api.mojecloud.ir
+  tls:
+    secretName: api-sec
+  redirectMiddleware: https-redirectscheme
+cert:
+  create: true
+  commonName: api.mojecloud.ir
+  secretName: api-sec
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
