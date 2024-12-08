@@ -195,7 +195,7 @@
           kubectl expose service prometheus-server --type=NodePort --target-port=9090 --name=prometheus-server-ext
           kubectl expose service prometheus-alertmanager --type=NodePort --target-port=9093 --name=prometheus-alertmanager-ext
       tags:
-        - local
+        - monitoring
     
     - name: Install Grafana with Helm Chart
       shell:
@@ -205,7 +205,7 @@
           helm install grafana grafana/grafana
           kubectl expose service grafana --type=NodePort --target-port=3000 --name=grafana-ext
       tags:
-        - local
+        - monitoring
 
 - name: Deploy Postgresql Cluster
   hosts: localhost
@@ -215,9 +215,9 @@
       shell:
         cmd: |
           helm install postgres oci://registry-1.docker.io/bitnamicharts/postgresql
-          
+          # TODO: retreive password and save in env or put it into a vault
       tags:
-        - local
+        - postgres
 
 - name: Setup ArgoCD in cluster
   hosts: localhost
@@ -230,11 +230,11 @@
         kind: Namespace
         state: present
       tags:
-        - local
+        - argocd
     
     - name: Install ArgoCD with Helm Chart
       shell:
         cmd: kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
       tags:
-        - local
+        - argocd
 

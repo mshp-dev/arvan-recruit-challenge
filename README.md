@@ -100,7 +100,7 @@
 ### 2. Spin up a k8s cluster (3 nodes) with Ansible
 - #### The playbook.yml contains necessary tasks for setup the kubernetes cluster on newly provioned aws ec2 isntances
   ```bash
-  ansible-playbook -i inventory.yml playbook.yml
+  ansible-playbook -i inventory.yml playbook.yml --skip-tags "monitoring,postgres"
   ```
 
 ### 1.3. Monitoring with Prometheus+Grafana
