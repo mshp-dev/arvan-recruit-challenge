@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "geo_loc_api.fullname" . }}
+  name: {{ include "geolocapi.fullname" . }}
   labels:
     name: "{{ .Chart.Name }}"
 spec:
@@ -25,9 +25,9 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
             - configMapRef:
-                name: {{ include "geo_loc_api.fullname" . }}-envs
+                name: {{ include "geolocapi.fullname" . }}-envs
             - secretRef:
-                name: {{ include "geo_loc_api.fullname" . }}-secrets
+                name: {{ include "geolocapi.fullname" . }}-secrets
           resources:
             requests:
               memory: "256M"

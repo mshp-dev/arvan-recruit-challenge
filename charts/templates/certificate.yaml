@@ -2,7 +2,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: {{ include "geo_loc_api.fullname" . }}-cert
+  name: {{ include "geolocapi.fullname" . }}-cert
   namespace: {{ .Values.namespace }}
 spec:
   commonName: {{ .Values.cert.commonName }}

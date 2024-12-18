@@ -2,7 +2,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: {{ include "geo_loc_api.fullname" . }}-http
+  name: {{ include "geolocapi.fullname" . }}-http
   namespace: {{ .Values.namespace }}
 spec:
   entryPoints:
@@ -21,7 +21,7 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: {{ include "geo_loc_api.fullname" . }}-https
+  name: {{ include "geolocapi.fullname" . }}-https
   namespace: {{ .Values.namespace }}
 spec:
   entryPoints:
@@ -32,7 +32,7 @@ spec:
     priority: 10
     services:
     - kind: Service
-      name: {{ include "geo_loc_api.fullname" . }}
+      name: {{ include "geolocapi.fullname" . }}
       namespace: {{ .Values.namespace }}
       passHostHeader: true
       port: {{ .Values.service.port }}

@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "geo_loc_api.fullname" . }}
+  name: {{ include "geolocapi.fullname" . }}
   namespace: {{ .Values.namespace }}
 spec:
   selector:
-    name: {{ include "geo_loc_api.fullname" . }}
+    name: {{ include "geolocapi.fullname" . }}
   ports:
     - protocol: {{ .Values.service.protocol }}
       port: {{ .Values.service.port }}

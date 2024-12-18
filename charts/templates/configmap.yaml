@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "geo_loc_api.fullname" . }}-envs
+  name: {{ include "geolocapi.fullname" . }}-envs
   namespace: {{ .Values.namespace }}
 data:
   {{- range $key, $val := .Values.envs }}
