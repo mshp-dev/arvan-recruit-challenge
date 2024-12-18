@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: geo_loc_api
+  name: GeoLocAPI
   namespace: default
   finalizers:
   - resource-finalizer.argocd.argoproj.io
