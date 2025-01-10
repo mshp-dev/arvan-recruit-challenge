@@ -167,6 +167,18 @@
         dest: ./files/kubeconfig
         flat: yes
 
+    - name: Install helm if not exists
+      unarchive:
+        src: https://get.helm.sh/helm-v3.11.0-linux-amd64.tar.gz
+        dest: /usr/local/bin
+        extra_opts: "--strip-components=1"
+        owner: root
+        group: root
+        mode: 0755
+        remote_src: true
+      args:
+        creates: /usr/local/bin/helm
+
     - name: Generate join token for worker nodes
       shell: sudo kubeadm token create --print-join-command
       register: join_node_token
@@ -183,7 +195,7 @@
       shell: "sudo {{ hostvars['control_plane'].join_node }}"
 
 - name: Install Prometheus and Grafana in cluster
-  hosts: localhost
+  hosts: master
   become: true
   tasks:
     - name: Install Prometheus with Helm Chart
@@ -208,7 +220,7 @@
         - monitoring
 
 - name: Deploy Postgresql Cluster
-  hosts: localhost
+  hosts: master
   become: true
   tasks:    
     - name: Install Postgresql with Helm Chart
@@ -220,7 +232,7 @@
         - postgres
 
 - name: Setup ArgoCD in cluster
-  hosts: localhost
+  hosts: master
   become: true
   tasks:
     - name: Create Separate Namespace for ArgoCD
